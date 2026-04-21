@@ -38,10 +38,22 @@ Para mitigarlo, implementaremos Sentencias Preparadas (Prepared Statements) para
 
 *Nombre tabla: productos*
 
-Columna	            Tipo de dato                	Límite de caracteres	             ¿Es nulo?	                Descripción
-id_producto	           INT	                         Auto-increment	                    No	             Llave primaria de la tabla.
-nombre_producto 	    VARCHAR	                          100                             No	             Nombre descriptivo del artículo.
-categoria          	 VARCHAR	                           50	                            No	             Grupo al que pertenece el producto.
-precio	             DECIMAL	                          10,2	                          No	             Valor monetario del producto.
-stock_disponible	   VARCHAR	                           2                             	No	             Indica si hay existencias (SI/NO).
-especificaciones	    TEXT	                          Sin límite                      	Sí               Notas adicionales del producto.
+| Columna            | Tipo de dato | Límite de caracteres | ¿Es nulo? | Descripción |
+|--------------------|-------------|----------------------|-----------|-------------|
+| id_producto        | INT         | Auto-increment       | No        | Llave primaria de la tabla. |
+| nombre_producto    | VARCHAR     | 100                  | No        | Nombre descriptivo del artículo. |
+| categoria          | VARCHAR     | 50                   | No        | Grupo al que pertenece el producto. |
+| precio             | DECIMAL     | 10,2                 | No        | Valor monetario del producto. |
+| stock_disponible   | VARCHAR     | 2                    | No        | Indica si hay existencias (SI/NO). |
+| especificaciones   | TEXT        | Sin límite           | Sí        | Notas adicionales del producto. |
+
+
+*Nombre tabla: usuarios*
+
+| Columna   | Tipo de dato | Límite de caracteres | ¿Es nulo? | Descripción |
+|-----------|-------------|----------------------|-----------|-------------|
+| id_usuario | INT        | Auto-increment       | No        | Identificador del usuario. |
+| username   | VARCHAR    | 50                   | No        | Nombre de acceso al sistema. |
+| password   | VARCHAR    | 255                  | No        | Clave de seguridad encriptada. |
+| rol        | VARCHAR    | 20                   | No        | Nivel de permisos del usuario. |
+
