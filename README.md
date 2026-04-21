@@ -31,3 +31,17 @@ mitigarían?**
 *Riesgos de seguridad en una app web con BD (Zona Oriental) y mitigación: 
 Identificamos el riesgo de Inyección SQL, donde un atacante podría intentar borrar la tabla de productos de la base de datos de "La Despensa".
 Para mitigarlo, implementaremos Sentencias Preparadas (Prepared Statements) para sanitizar cualquier entrada de datos antes de que llegue a la base de datos.*
+
+
+**Diccionario de Datos**
+
+
+*Nombre tabla: productos*
+
+Columna	            Tipo de dato                	Límite de caracteres	             ¿Es nulo?	                Descripción
+id_producto	           INT	                         Auto-increment	                    No	             Llave primaria de la tabla.
+nombre_producto 	    VARCHAR	                          100                             No	             Nombre descriptivo del artículo.
+categoria          	 VARCHAR	                           50	                            No	             Grupo al que pertenece el producto.
+precio	             DECIMAL	                          10,2	                          No	             Valor monetario del producto.
+stock_disponible	   VARCHAR	                           2                             	No	             Indica si hay existencias (SI/NO).
+especificaciones	    TEXT	                          Sin límite                      	Sí               Notas adicionales del producto.
