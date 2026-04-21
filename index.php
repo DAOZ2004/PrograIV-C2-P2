@@ -29,6 +29,7 @@ $result = $conn->query("SELECT * FROM productos ORDER BY nombre ASC");
 <tr>
 <th>Nombre</th>
 <th>Categoría</th>
+<th>Descripción</th>
 <th>Precio</th>
 
 <?php if($sesion_activa){ ?>
@@ -40,6 +41,7 @@ $result = $conn->query("SELECT * FROM productos ORDER BY nombre ASC");
 <tr>
 <td><?php echo $row['nombre']; ?></td>
 <td><?php echo $row['categoria']; ?></td>
+<td><?php echo $row['descripcion']; ?></td>
 <td>$<?php echo $row['precio']; ?></td>
 
 <?php if($sesion_activa){ ?>
