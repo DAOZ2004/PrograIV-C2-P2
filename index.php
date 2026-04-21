@@ -1,66 +1,103 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "despensa_don_juan");
+include('Conexion.php'); // Conexión a la base de datos
 
-// Lógica de validación de sesión para ingreso de datos [cite: 45]
-$es_admin = isset($_SESSION['usuario_id']);
+// Variable para saber si el usuario inició sesión
+$sesion_activa = isset($_SESSION['usuario_id']);
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>La Despensa de Don Juan - Inventario</title>
+    <meta charset="UTF-8">
+    <title>La Despensa de Don Juan - Sistema en Línea</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+
 <div class="container">
-    <h1>Sistema de Tienda en Línea</h1>
-    
-    <?php if($es_admin): ?>
+    <header>
+        <h1>La Despensa de Don Juan</h1>
+        <p>Sucursal San Miguel - Sistema de Inventario</p>
+    </header>
+
+    <?php if ($sesion_activa): ?>
         <div class="form-registro">
-            <h3>Registrar Nuevo Producto (Modo Administrador)</h3>
-            <form method="POST" action="guardar.php">
-                <input type="text" name="nombre" placeholder="Nombre del producto" required>
-                
-                <label>Categoría:</label>
-                <select name="categoria"> <option value="Abarrotes">Abarrotes</option>
-                    <option value="Limpieza">Limpieza</option>
-                    <option value="Lácteos">Lácteos</option>
-                </select>
+            <h2>Registrar Nuevo Producto</h2>
+            <p>Bienvenido, <strong><?php echo $_SESSION['usuario_nombre']; ?></strong> | <a href="logout.php">Cerrar Sesión</a></p>
+            
+            <form action="guardar.php" method="POST">
+                <div class="grupo">
+                    <label>Nombre del Producto:</label>
+                    <input type="text" name="nombre" required placeholder="Ej: Frijoles Rojos 1lb">
+                </div>
 
-                <input type="number" step="0.01" name="precio" placeholder="Precio" required>
+                <div class="grupo">
+                    <label>Categoría:</label>
+                    <select name="categoria">
+                        <option value="Abarrotes">Abarrotes</option>
+                        <option value="Lácteos">Lácteos</option>
+                        <option value="Limpieza">Limpieza</option>
+                        <option value="Bebidas">Bebidas</option>
+                    </select>
+                </div>
 
-                <label>¿Hay stock?</label> <input type="radio" name="stock" value="SI" checked> Sí
-                <input type="radio" name="stock" value="NO"> No
-                
-                <button type="submit">Guardar Producto</button>
+                <div class="grupo">
+                    <label>Precio Unitario ($):</label>
+                    <input type="number" step="0.01" name="precio" required>
+                </div>
+
+                <div class="grupo">
+                    <label>¿Disponible en Estantería?</label><br>
+                    <input type="radio" name="stock" value="SI" checked> Sí hay stock
+                    <input type="radio" name="stock" value="NO"> Agotado
+                </div>
+
+                <button type="submit" class="btn-guardar">Guardar en Base de Datos</button>
             </form>
-            <a href="logout.php">Cerrar Sesión</a>
         </div>
     <?php else: ?>
-        <div style="text-align:right;"><a href="login.php">Login para administradores</a></div>
+        <div class="aviso-visitante">
+            <p>Usted está viendo el catálogo público. Para agregar o editar productos, por favor <a href="login.php">Inicie Sesión</a>.</p>
+        </div>
     <?php endif; ?>
 
-    <h3>Catálogo de Productos Disponibles</h3>
-    <table>
-        <thead>
-            <tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Detalles</th></tr>
-        </thead>
-        <tbody>
-            <?php
-            $query = "SELECT * FROM productos ORDER BY nombre_producto ASC"; 
-            $result = mysqli_query($conn, $query);
-            while($row = mysqli_fetch_assoc($result)){
-                echo "<tr>
-                        <td>{$row['nombre_producto']}</td>
-                        <td>{$row['categoria']}</td>
-                        <td>\${$row['precio']}</td>
-                        <td>{$row['stock_disponible']}</td>
-                        <td>".($row['especificaciones'] ?? 'N/A')."</td>
-                      </tr>";
-            }
-            ?>
-        </tbody>
-    </table>
+    <hr>
+
+    <div class="tabla-datos">
+        <h2>Catálogo de Productos Disponibles</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre Producto</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Estado de Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Requisito: Tabla ordenada (ORDER BY nombre_producto ASC)
+                $query = "SELECT * FROM productos ORDER BY nombre_producto ASC";
+                $result = mysqli_query($conn, $query);
+
+                if(mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['nombre_producto'] . "</td>";
+                        echo "<td>" . $row['categoria'] . "</td>";
+                        echo "<td>$" . number_format($row['precio'], 2) . "</td>";
+                        echo "<td>" . ($row['stock_disponible'] == 'SI' ? 'Disponible' : 'Agotado') . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4'>No hay productos registrados aún.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
 </div>
+
 </body>
 </html>
