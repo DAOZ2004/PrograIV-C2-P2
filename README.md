@@ -47,5 +47,5 @@ mitigarían?**
 
 # Usuario que se uso:
 
-*Nombre: Admin, Correo: daoz20403@gmail.com, contra: 123*
+*Username: Admin, Correo: daoz20403@gmail.com, contra: 123*
 
