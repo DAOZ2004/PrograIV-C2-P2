@@ -3,7 +3,7 @@ session_start();
 include('Conexion.php');
 
 // Si alguien intenta entrar aquí sin loguearse, lo sacamos
-if (!isset($_SESSION['id_usuario'])) {
+if (!isset($_SESSION['id_usuarios'])) {
     die("Acceso denegado. Debes estar registrado para realizar esta acción.");
 }
 

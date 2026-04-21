@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verificamos la contraseña (en este ejemplo comparamos texto plano, 
         // pero para producción se recomienda password_verify)
         if ($password == $row['password']) {
-            $_SESSION['usuario_id'] = $row['id_usuario'];
+            $_SESSION['id_usuarios'] = $row['id_usuarios'];
             $_SESSION['usuario_nombre'] = $row['username'];
             
             header("Location: index.php"); // Redirige al inventario
