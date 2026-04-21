@@ -1,0 +1,32 @@
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5;
+ }
+
+.container { 
+    max-width: 900px; 
+    margin: 30px auto; 
+    background: #fff; 
+    padding: 25px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+ }
+
+h1 { 
+    color: #cc0000; 
+    text-align: center; 
+} /* Rojo característico de la marca */
+table { 
+    width: 100%; border-collapse: collapse; margin-top: 20px; 
+}
+th, td { 
+    padding: 12px; border: 1px solid #ddd; text-align: left;
+ }
+th { 
+    background-color: #003399; color: white; 
+}
+.form-registro { 
+    background: #f9f9f9; padding: 20px; border: 1px border #ccc; margin-bottom: 20px;
+ }
+input, select { 
+    margin: 10px 0; padding: 8px; width: 100%; box-sizing: border-box;
+ }
