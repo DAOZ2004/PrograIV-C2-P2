@@ -1,25 +1,20 @@
 <?php
 session_start();
-include('Conexion.php');
+include("conexion.php");
 
-// Si alguien intenta entrar aquí sin loguearse, lo sacamos
-if (!isset($_SESSION['id_usuarios'])) {
-    die("Acceso denegado. Debes estar registrado para realizar esta acción.");
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nom = mysqli_real_escape_string($conn, $_POST['nombre']);
-    $cat = $_POST['categoria'];
-    $pre = $_POST['precio'];
-    $stk = $_POST['stock'];
+$nombre = $_POST['nombre'];
+$categoria = $_POST['categoria'];
+$precio = $_POST['precio'];
+$descripcion = $_POST['descripcion'];
 
-    $sql = "INSERT INTO productos (nombre_producto, categoria, precio, stock_disponible) 
-            VALUES ('$nom', '$cat', '$pre', '$stk')";
+$sql = "INSERT INTO productos(nombre,categoria,precio,descripcion)
+        VALUES('$nombre','$categoria','$precio','$descripcion')";
 
-    if (mysqli_query($conn, $sql)) {
-        header("Location: index.php?status=ok");
-    } else {
-        echo "Error: " . mysqli_error($conn);
-    }
-}
+$conn->query($sql);
+header("Location: mostrar.php");
 ?>

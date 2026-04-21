@@ -1,26 +1,28 @@
 <?php
 session_start();
-include('Conexion.php');
-
-if (!isset($_SESSION['id_usuario'])) {
-    die("Acceso denegado");
-}
+include("conexion.php");
 
 $id = $_GET['id'];
-
-$query = "SELECT * FROM productos WHERE id_producto = '$id'";
-$result = mysqli_query($conn, $query);
-$row = mysqli_fetch_assoc($result);
+$result = $conn->query("SELECT * FROM productos WHERE id=$id");
+$row = $result->fetch_assoc();
 ?>
 
+<h2>Editar Producto</h2>
+
 <form method="POST" action="actualizar.php">
-    <input type="hidden" name="id" value="<?php echo $row['id_producto']; ?>">
+<input type="hidden" name="id" value="<?php echo $row['id']; ?>">
 
-    Nombre:
-    <input type="text" name="nombre" value="<?php echo $row['nombre_producto']; ?>">
+Nombre:<br>
+<input type="text" name="nombre" value="<?php echo $row['nombre']; ?>"><br><br>
 
-    Precio:
-    <input type="number" step="0.01" name="precio" value="<?php echo $row['precio']; ?>">
+Categoria:<br>
+<input type="text" name="categoria" value="<?php echo $row['categoria']; ?>"><br><br>
 
-    <button type="submit">Actualizar</button>
+Precio:<br>
+<input type="number" step="0.01" name="precio" value="<?php echo $row['precio']; ?>"><br><br>
+
+Descripcion:<br>
+<input type="text" name="descripcion" value="<?php echo $row['descripcion']; ?>"><br><br>
+
+<button type="submit">Actualizar</button>
 </form>

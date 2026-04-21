@@ -1,21 +1,17 @@
 <?php
 session_start();
-include('Conexion.php');
-
-if (!isset($_SESSION['id_usuario'])) {
-    die("Acceso denegado");
-}
+include("conexion.php");
 
 $id = $_POST['id'];
 $nombre = $_POST['nombre'];
+$categoria = $_POST['categoria'];
 $precio = $_POST['precio'];
+$descripcion = $_POST['descripcion'];
 
-$sql = "UPDATE productos 
-        SET nombre_producto='$nombre', precio='$precio'
-        WHERE id_producto='$id'";
+$conn->query("UPDATE productos SET 
+nombre='$nombre', categoria='$categoria',
+precio='$precio', descripcion='$descripcion'
+WHERE id=$id");
 
-if (mysqli_query($conn, $sql)) {
-    header("Location: index.php");
-} else {
-    echo "Error: " . mysqli_error($conn);
-}
+header("Location: mostrar.php");
+?>
