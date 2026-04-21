@@ -73,6 +73,7 @@ $sesion_activa = isset($_SESSION['id_usuario']);
                     <th>Categoría</th>
                     <th>Precio</th>
                     <th>Estado de Stock</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -89,6 +90,16 @@ $sesion_activa = isset($_SESSION['id_usuario']);
                         echo "<td>$" . number_format($row['precio'], 2) . "</td>";
                         echo "<td>" . ($row['stock_disponible'] == 'SI' ? 'Disponible' : 'Agotado') . "</td>";
                         echo "</tr>";
+                        echo "<td>";
+                       if ($sesion_activa) {
+                         echo "<a href='editar.php?id=" . $row['id_producto'] . "'>Editar</a>";
+                   }
+                 echo "</td>";
+
+                  echo "</tr>";
+
+
+                         
                     }
                 } else {
                     echo "<tr><td colspan='4'>No hay productos registrados aún.</td></tr>";
