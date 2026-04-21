@@ -3,7 +3,7 @@ session_start();
 include('Conexion.php'); // Conexión a la base de datos
 
 // Variable para saber si el usuario inició sesión
-$sesion_activa = isset($_SESSION['usuario_id']);
+$sesion_activa = isset($_SESSION['id_usuario']);
 ?>
 
 <!DOCTYPE html>
