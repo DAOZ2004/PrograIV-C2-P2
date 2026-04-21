@@ -1,56 +1,65 @@
-<?php 
+<?php
 session_start();
-include('db.php'); 
+$conn = mysqli_connect("localhost", "root", "", "despensa_don_juan");
+
+// Lógica de validación de sesión para ingreso de datos [cite: 45]
+$es_admin = isset($_SESSION['usuario_id']);
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <title>La Despensa de Don Juan - Tienda</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
-        .container { width: 80%; margin: auto; background: white; padding: 20px; border-radius: 8px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background-color: #004b93; color: white; }
-        .form-box { background: #e9ecef; padding: 15px; margin-bottom: 20px; }
-    </style>
+    <title>La Despensa de Don Juan - Inventario</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 <div class="container">
-    <h1>Tienda en Línea - La Despensa de Don Juan</h1>
-
-    <?php if(isset($_SESSION['usuario'])): ?>
-        <div class="form-box">
-            <h3>Agregar Nuevo Producto</h3>
-            <form action="insertar.php" method="POST">
-                Nombre: <input type="text" name="nombre" required>
-                Categoría: 
-                <select name="categoria">
-                    <option value="Lácteos">Lácteos</option>
+    <h1>Sistema de Tienda en Línea</h1>
+    
+    <?php if($es_admin): ?>
+        <div class="form-registro">
+            <h3>Registrar Nuevo Producto (Modo Administrador)</h3>
+            <form method="POST" action="guardar.php">
+                <input type="text" name="nombre" placeholder="Nombre del producto" required>
+                
+                <label>Categoría:</label>
+                <select name="categoria"> <option value="Abarrotes">Abarrotes</option>
                     <option value="Limpieza">Limpieza</option>
-                    <option value="Frutas">Frutas</option>
+                    <option value="Lácteos">Lácteos</option>
                 </select>
-                Precio: <input type="number" step="0.01" name="precio" required>
-                ¿Disponible?: 
-                <input type="radio" name="disponible" value="SI" checked> Sí
-                <input type="radio" name="disponible" value="NO"> No
-                <button type="submit">Guardar</button>
+
+                <input type="number" step="0.01" name="precio" placeholder="Precio" required>
+
+                <label>¿Hay stock?</label> <input type="radio" name="stock" value="SI" checked> Sí
+                <input type="radio" name="stock" value="NO"> No
+                
+                <button type="submit">Guardar Producto</button>
             </form>
             <a href="logout.php">Cerrar Sesión</a>
         </div>
     <?php else: ?>
-        <p><a href="login.php">Inicie sesión</a> para agregar productos.</p>
+        <div style="text-align:right;"><a href="login.php">Login para administradores</a></div>
     <?php endif; ?>
 
-    <h3>Listado de Productos</h3>
+    <h3>Catálogo de Productos Disponibles</h3>
     <table>
-        <tr><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Disponible</th></tr>
-        <?php
-        $res = mysqli_query($conn, "SELECT * FROM productos ORDER BY nombre_prod ASC");
-        while($row = mysqli_fetch_assoc($res)) {
-            echo "<tr><td>{$row['nombre_prod']}</td><td>{$row['categoria']}</td><td>${$row['precio']}</td><td>{$row['disponible']}</td></tr>";
-        }
-        ?>
+        <thead>
+            <tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Detalles</th></tr>
+        </thead>
+        <tbody>
+            <?php
+            [cite_start]$query = "SELECT * FROM productos ORDER BY nombre_producto ASC"; [cite: 45]
+            $result = mysqli_query($conn, $query);
+            while($row = mysqli_fetch_assoc($result)){
+                echo "<tr>
+                        <td>{$row['nombre_producto']}</td>
+                        <td>{$row['categoria']}</td>
+                        <td>\${$row['precio']}</td>
+                        <td>{$row['stock_disponible']}</td>
+                        <td>".($row['especificaciones'] ?? 'N/A')."</td>
+                      </tr>";
+            }
+            ?>
+        </tbody>
     </table>
 </div>
 </body>
