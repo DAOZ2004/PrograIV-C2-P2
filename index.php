@@ -47,7 +47,7 @@ $es_admin = isset($_SESSION['usuario_id']);
         </thead>
         <tbody>
             <?php
-            [cite_start]$query = "SELECT * FROM productos ORDER BY nombre_producto ASC"; [cite: 45]
+            $query = "SELECT * FROM productos ORDER BY nombre_producto ASC"; 
             $result = mysqli_query($conn, $query);
             while($row = mysqli_fetch_assoc($result)){
                 echo "<tr>
