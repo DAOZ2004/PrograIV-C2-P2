@@ -45,4 +45,7 @@ mitigarían?**
 | correo   | VARCHAR(100) | No   | Correo del usuario |
 | password | VARCHAR(100) | No   | Contraseña del usuario |
 
+# Usuario que se uso:
+
+*Nombre: Admin, Correo:daoz20403@gmail.com, contra: 123*
 
