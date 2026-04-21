@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Consulta para buscar al usuario
-    $sql = "SELECT id_usuario, username, password FROM usuarios WHERE username = '$usuario'";
+    $sql = "SELECT id_usuarios, username, password FROM usuarios WHERE username = '$usuario'";
     $result = mysqli_query($conn, $sql);
     
     if ($row = mysqli_fetch_assoc($result)) {
