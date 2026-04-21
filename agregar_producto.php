@@ -5,7 +5,7 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 ?>
-
+<link rel="stylesheet" href="estilos.css">
 <h2>Agregar Producto</h2>
 
 <form method="POST" action="guardar.php">
@@ -30,5 +30,5 @@ Descripcion:<br>
 </form>
 
 <br>
-<a href="mostrar.php">Ver productos</a> |
+<a href="index.php">Ver productos</a> |
 <a href="logout.php">Cerrar sesión</a>

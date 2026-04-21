@@ -16,5 +16,5 @@ $sql = "INSERT INTO productos(nombre,categoria,precio,descripcion)
         VALUES('$nombre','$categoria','$precio','$descripcion')";
 
 $conn->query($sql);
-header("Location: mostrar.php");
+header("Location: index.php");
 ?>

@@ -13,5 +13,5 @@ nombre='$nombre', categoria='$categoria',
 precio='$precio', descripcion='$descripcion'
 WHERE id=$id");
 
-header("Location: mostrar.php");
+header("Location: index.php");
 ?>

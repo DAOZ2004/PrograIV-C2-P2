@@ -2,7 +2,6 @@
 session_start();
 include("conexion.php");
 
-// Si ya inició sesión lo manda directo al panel
 if(isset($_SESSION['usuario'])){
     header("Location: agregar_producto.php");
     exit();
@@ -10,21 +9,25 @@ if(isset($_SESSION['usuario'])){
 
 $error = "";
 
-// Cuando se envía el formulario
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+    $username = $_POST['username'];
     $correo = $_POST['correo'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM usuarios WHERE correo='$correo' AND password='$password'";
+    $sql = "SELECT * FROM usuarios 
+            WHERE username='$username' 
+            AND correo='$correo' 
+            AND password='$password'";
+
     $resultado = $conn->query($sql);
 
     if($resultado->num_rows > 0){
-        $_SESSION['usuario'] = $correo;
+        $_SESSION['usuario'] = $username;
         header("Location: agregar_producto.php");
         exit();
     }else{
-        $error = "Correo o contraseña incorrectos";
+        $error = "Datos incorrectos";
     }
 }
 ?>
@@ -32,24 +35,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login - Despensa Don Juan</title>
+<title>Login</title>
+<link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
 <h2>Iniciar Sesión</h2>
 
 <form method="POST">
-    <label>Correo:</label><br>
-    <input type="email" name="correo" required><br><br>
 
-    <label>Contraseña:</label><br>
-    <input type="password" name="password" required><br><br>
+<label>Username:</label>
+<input type="text" name="username" required>
 
-    <button type="submit">Ingresar</button>
+<label>Correo:</label>
+<input type="email" name="correo" required>
+
+<label>Contraseña:</label>
+<input type="password" name="password" required>
+
+<button type="submit">Ingresar</button>
+
 </form>
 
-<br>
-<span style="color:red;"><?php echo $error; ?></span>
+<p class="error"><?php echo $error; ?></p>
 
 </body>
 </html>

@@ -1,32 +1,97 @@
-body { 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5;
- }
-
-.container { 
-    max-width: 900px; 
-    margin: 30px auto; 
-    background: #fff; 
-    padding: 25px; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
- }
-
-h1 { 
-    color: #cc0000; 
-    text-align: center; 
-} /* Rojo característico de la marca */
-table { 
-    width: 100%; border-collapse: collapse; margin-top: 20px; 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
-th, td { 
-    padding: 12px; border: 1px solid #ddd; text-align: left;
- }
-th { 
-    background-color: #003399; color: white; 
+
+/* ===== FONDO GENERAL ===== */
+body{
+    background:#f4f6f9;
+    padding:40px;
 }
-.form-registro { 
-    background: #f9f9f9; padding: 20px; border: 1px border #ccc; margin-bottom: 20px;
- }
-input, select { 
-    margin: 10px 0; padding: 8px; width: 100%; box-sizing: border-box;
- }
+
+/* ===== TITULOS ===== */
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+/* ===== CONTENEDOR ===== */
+form, table{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    width:400px;
+    margin:auto;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+}
+
+/* ===== INPUTS ===== */
+input, select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    margin-bottom:15px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+/* ===== BOTONES ===== */
+button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    background:#28a745;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#218838;
+}
+
+/* ===== LINKS ===== */
+a{
+    text-decoration:none;
+    color:#007bff;
+    font-weight:bold;
+}
+
+a:hover{
+    color:#0056b3;
+}
+
+/* ===== TABLA PRODUCTOS ===== */
+table{
+    width:80%;
+    border-collapse:collapse;
+}
+
+table th{
+    background:#28a745;
+    color:white;
+    padding:10px;
+}
+
+table td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+/* ===== MENÚ SUPERIOR ===== */
+.menu{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+/* ===== MENSAJES ERROR ===== */
+.error{
+    color:red;
+    text-align:center;
+    margin-top:10px;
+}
